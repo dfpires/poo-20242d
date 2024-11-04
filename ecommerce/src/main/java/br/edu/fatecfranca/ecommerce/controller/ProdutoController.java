@@ -40,4 +40,24 @@ public class ProdutoController {
         return new ResponseEntity<>(produtoService.salvar(produtoDTO), HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> remove(@PathVariable Long id){
+        Produto aux = produtoService.remove(id);
+        if ( aux != null) {
+            return new ResponseEntity<>(aux, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>("Produto não encontrado", HttpStatus.NOT_FOUND);
+        }
+    }
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody ProdutoDTO produtoDTO){
+        Produto aux = produtoService.atualizar(id, produtoDTO);
+        if ( aux != null) {
+            return new ResponseEntity<>(aux, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>("Produto não encontrado", HttpStatus.NOT_FOUND);
+        }
+    }
 }

@@ -32,4 +32,24 @@ public class ProdutoService {
         return produtoRepository.save(produto);
 
     }
+
+    public Produto remove(Long id){
+        Optional<Produto> produto = produtoRepository.findById(id);
+        if(produto.isPresent()){
+            produtoRepository.delete(produto.get());
+            return produto.get();
+        }
+        return null; // não encontrou produto para remover
+    }
+    public Produto atualizar(Long id, ProdutoDTO produtoDTO){
+        Optional<Produto> produto = produtoRepository.findById(id);
+        if(produto.isPresent()){
+            produto.get().setNome(produtoDTO.getNome());
+            produto.get().setDescricao(produtoDTO.getDescricao());
+            produto.get().setPreco(produtoDTO.getPreco());
+            produto.get().setUrl_imagem(produtoDTO.getUrl_imagem());
+            return produtoRepository.save(produto.get()); // atualiza e não cria, pois produto tem ID
+        }
+        return null;
+    }
 }
