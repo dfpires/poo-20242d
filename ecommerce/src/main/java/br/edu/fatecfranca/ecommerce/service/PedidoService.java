@@ -40,10 +40,11 @@ public class PedidoService {
         pedido.setCliente(cliente);
         // define o statis do pedido
         pedido.setStatus(pedidoDTO.getStatus());
+        pedido.setData(pedidoDTO.getData());
         // salvar cada item do pedido
         for (ItemPedidoDTO itemPedidoDTO : pedidoDTO.getItens()) {
             // verifica se o produto existe
-            Produto produto = produtoRepository.findById(pedidoDTO.getIdCliente()).orElseThrow(
+            Produto produto = produtoRepository.findById(itemPedidoDTO.getIdProduto()).orElseThrow(
                     () -> new IllegalArgumentException("Produto não encontrado"));
             ItemPedido itemPedido = new ItemPedido();
             itemPedido.setProduto(produto);

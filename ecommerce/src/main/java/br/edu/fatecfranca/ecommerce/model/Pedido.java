@@ -1,9 +1,11 @@
 package br.edu.fatecfranca.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 // lombok - cria os construtores, getters e setter
@@ -24,5 +26,6 @@ public class Pedido {
     private Cliente cliente; // cliente que fez o pedido
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
-    private List<ItemPedido> itens;
+    @JsonManagedReference  // Define o lado "pai" da relação
+    private List<ItemPedido> itens = new ArrayList<>(); // inicializa a lista
 }

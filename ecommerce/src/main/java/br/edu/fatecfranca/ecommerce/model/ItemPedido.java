@@ -1,5 +1,6 @@
 package br.edu.fatecfranca.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,5 +19,6 @@ public class ItemPedido {
 
     @ManyToOne
     @JoinColumn(name="id_pedido")
+    @JsonBackReference  // Define o lado "filho" da relação
     private Pedido pedido;
 }
